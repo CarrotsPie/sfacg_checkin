@@ -74,9 +74,10 @@ def checkin(cookie):
         {"seconds": 3605, "readingDate": Date, "entityType": 2})
     ListenData = json.dumps(
         {"seconds": 3605, "readingDate": Date, "entityType": 3})
-    for _ in range(1):
+    for _ in range(5):
         resp = requests.put(
             "https://api.sfacg.com/user/newSignInfo", headers=headers, data=signDate).json()
+        print(resp)
         try:
             couponNum += resp['data'][0]['num']
         except:
@@ -96,6 +97,7 @@ def checkin(cookie):
             time.sleep(0.5)
             resp = requests.put(
                 'https://api.sfacg.com/user/tasks/5', headers=headers, data=ListenData)
+            print(resp)
             try:
                 fireCoin += resp['data']['fireCoin']
                 exp += resp['data']['exp']
@@ -103,6 +105,7 @@ def checkin(cookie):
                 pass
             resp = requests.put(
                 'https://api.sfacg.com/user/tasks/17', headers=headers, data=ListenData)
+            print(resp)
             try:
                 fireCoin += resp['data']['fireCoin']
                 exp += resp['data']['exp']
@@ -116,10 +119,12 @@ def checkin(cookie):
             url = f"https://api.sfacg.com/user/tasks/21/advertisement?aid=43&deviceToken={device_token}"
             resp = requests.put(url, headers=headers,
                                 data=json.dumps({"num": 1})).json()
+            print(resp)
             url = f"https://api.sfacg.com/user/tasks?taskCategory=5&package=com.sfacg&deviceToken={device_token}&page=0&size=10"
             requests.get(url, headers=headers).json()
             resp = requests.put("https://api.sfacg.com/user/tasks/21",
                                 headers=headers, data=json.dumps({"num": 1}))
+            print(resp)
             try:
                 couponNum += resp['data']['couponNum']
             except:
