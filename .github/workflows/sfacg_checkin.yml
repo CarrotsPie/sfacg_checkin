@@ -1,0 +1,29 @@
+name: sfacg check in
+
+on:
+  schedule:
+    - cron: '0 22 * * *' # 北京时间6点(UTC时间22点)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set TimeZone to Asia/Shanghai
+        run: |
+          sudo timedatectl set-timezone 'Asia/Shanghai'
+      - name: Checkout repository content
+        uses: actions/checkout@v2 # This GitHub Action checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
+      - name: Set up Python environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: pip install requests
+      - name: Run the script
+        run: python main.py
+        env:
+          SFCommunity: ${{ secrets.SFCommunity }}
+          session_APP: ${{ secrets.session_APP }}
+          username: ${{ secrets.username }}
+          password: ${{ secrets.password }}
+          dingTalkToken: ${{ secrets.dingTalkToken }}
