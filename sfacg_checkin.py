@@ -80,7 +80,7 @@ def checkin(cookie):
     for _ in range(3):
         resp = requests.put(
             "https://api.sfacg.com/user/newSignInfo", headers=headers, data=signDate).json()
-        print(resp)
+        # print(resp)
         if(resp['status']['httpCode'] == 200):
             couponNum += resp['data'][0]['num']
         requests.put('https://api.sfacg.com/user/readingtime',
@@ -98,13 +98,13 @@ def checkin(cookie):
             time.sleep(0.5)
             resp = requests.put(
                 'https://api.sfacg.com/user/tasks/5', headers=headers, data=ListenData).json()
-            print(resp)
+            # print(resp)
             if(resp['status']['httpCode'] == 200):
                 fireCoin += resp['data']['fireCoin']
                 exp += resp['data']['exp']
             resp = requests.put(
                 'https://api.sfacg.com/user/tasks/17', headers=headers, data=ListenData).json()
-            print(resp)
+            # print(resp)
             if(resp['status']['httpCode'] == 200):
                 fireCoin += resp['data']['fireCoin']
                 exp += resp['data']['exp']
