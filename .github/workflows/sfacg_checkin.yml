@@ -1,6 +1,7 @@
 name: sfacg check in
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 22 * * *' # 北京时间6点(UTC时间22点)
 
