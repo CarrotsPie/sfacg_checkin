@@ -4,6 +4,7 @@ import uuid
 import sys
 import hashlib
 import json
+import os
 
 nonce = "C7DC5CAD-31CF-4431-8635-B415B75BF4F3"
 
