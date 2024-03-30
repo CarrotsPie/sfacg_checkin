@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: pip install requests
       - name: Run the script
-        run: python main.py
+        run: python sfacg_checkin.py
         env:
           SFCommunity: ${{ secrets.SFCommunity }}
           session_APP: ${{ secrets.session_APP }}
