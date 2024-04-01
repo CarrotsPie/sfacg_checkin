@@ -7,18 +7,18 @@ import json
 import os
 
 nonce = "C7DC5CAD-31CF-4431-8635-B415B75BF4F3"
-
+device_token = str(uuid.uuid4())
 SALT = "FN_Q29XHVmfV3mYX"
 headers = {
     'Host': 'api.sfacg.com',
     'accept-charset': 'UTF-8',
     'authorization': 'Basic YW5kcm9pZHVzZXI6MWEjJDUxLXl0Njk7KkFjdkBxeHE=',
     'accept': 'application/vnd.sfacg.api+json;version=1',
-    'user-agent': 'boluobao/5.0.36(android;32)/H5/192e221c-120e-3120-b3b6-62cb913b9d66/H5',
+    'user-agent': f'boluobao/5.0.36(android;32)/H5/{device_token}/H5',
     'accept-encoding': 'gzip',
     'Content-Type': 'application/json; charset=UTF-8'
 }
-
+device_token = device_token.upper()
 
 def md5_hex(input, case):
     m = hashlib.md5()
@@ -42,7 +42,7 @@ def check(cookie):
 
 
 def login(username, password):
-    device_token = "192E221C-120E-3120-B3B6-62CB913B9D66"
+    
     timestamp = int(time.time() * 1000)
     sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
     headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
@@ -66,7 +66,7 @@ def checkin(cookie):
     global exp
     global couponNum
     global fireCoin
-    device_token = str(uuid.uuid4())
+    
     timestamp = int(time.time() * 1000)
     sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
     headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
