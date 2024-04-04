@@ -81,7 +81,7 @@ def checkin(cookie):
         resp = requests.put(
             "https://api.sfacg.com/user/newSignInfo", headers=headers, data=signDate).json()
         # print(resp)
-        if(resp['status']['httpCode'] == 200):
+        if('status' in resp and resp['status']['httpCode'] == 200):
             couponNum += resp['data'][0]['num']
         requests.put('https://api.sfacg.com/user/readingtime',
                      headers=headers, data=ListenData)
