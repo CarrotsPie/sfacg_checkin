@@ -139,6 +139,10 @@ def checkin(cookie):
             if(resp['status']['httpCode'] == 200):
                 fireCoin += resp['data']['fireCoin']
                 exp += resp['data']['exp']
+        
+        timestamp = int(time.time() * 1000)
+        sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
+        headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
         url = "https://api.sfacg.com/user/tasks/21"
         requests.post(url, headers=headers).json()
         for _ in range(5):
@@ -155,8 +159,12 @@ def checkin(cookie):
             url = f"https://api.sfacg.com/user/tasks/21/advertisement?aid=43&deviceToken={device_token}"
             resp = requests.put(url, headers=headers,
                                 data=json.dumps({"num": 1})).json()
-            # url = f"https://api.sfacg.com/user/tasks?taskCategory=5&package=com.sfacg&deviceToken={device_token}&page=0&size=10"
-            # requests.get(url, headers=headers).json()
+            
+            timestamp = int(time.time() * 1000)
+            sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
+            headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
+            url = f"https://api.sfacg.com/user/tasks?taskCategory=5&package=com.sfacg&deviceToken={device_token}&page=0&size=10"
+            requests.get(url, headers=headers).json()
             
             timestamp = int(time.time() * 1000)
             sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
