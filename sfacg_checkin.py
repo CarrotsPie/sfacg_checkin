@@ -140,11 +140,24 @@ def checkin(cookie):
                 fireCoin += resp['data']['fireCoin']
                 exp += resp['data']['exp']
         
+        # timestamp = int(time.time() * 1000)
+        # sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
+        # headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
+        # url = "https://api.sfacg.com/user/tasks/21"
+        # requests.post(url, headers=headers).json()
+
         timestamp = int(time.time() * 1000)
         sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
         headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
-        url = "https://api.sfacg.com/user/tasks/21"
-        requests.post(url, headers=headers).json()
+        url = f"https://api.sfacg.com/user/sign/continueDay"
+        requests.get(url, headers=headers).json()
+        
+        timestamp = int(time.time() * 1000)
+        sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
+        headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
+        url = f"https://api.sfacg.com/api/ad/union/ping"
+        requests.get(url, headers=headers).json()
+        
         for _ in range(5):
             
             timestamp = int(time.time() * 1000)
