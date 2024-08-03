@@ -150,13 +150,13 @@ def checkin(cookie):
         sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
         headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
         url = "https://api.sfacg.com/user/sign/continueDay"
-        requests.get(url, headers=headers)
+        print(requests.get(url, headers=headers))
         
         timestamp = int(time.time() * 1000)
         sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
         headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
         url = "https://api.sfacg.com/api/ad/union/ping"
-        requests.get(url, headers=headers)
+        print(requests.get(url, headers=headers))
         
         for _ in range(5):
             
@@ -164,7 +164,7 @@ def checkin(cookie):
             sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
             headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
             url = f"https://api.sfacg.com/user/advertisements?deviceToken={device_token}&page=0&size=20"
-            requests.get(url, headers=headers).json()
+            print(requests.get(url, headers=headers).json())
             
             timestamp = int(time.time() * 1000)
             sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
@@ -172,7 +172,7 @@ def checkin(cookie):
             url = f"https://api.sfacg.com/user/tasks/21/advertisement?aid=43&deviceToken={device_token}"
             resp = requests.put(url, headers=headers,
                                 data=json.dumps({"num": 1})).json()
-            
+            print(resp)
             timestamp = int(time.time() * 1000)
             sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
             headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
