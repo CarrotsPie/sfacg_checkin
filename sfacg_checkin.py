@@ -149,14 +149,14 @@ def checkin(cookie):
         timestamp = int(time.time() * 1000)
         sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
         headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
-        url = f"https://api.sfacg.com/user/sign/continueDay"
-        requests.get(url, headers=headers).json()
+        url = "https://api.sfacg.com/user/sign/continueDay"
+        requests.get(url, headers=headers)
         
         timestamp = int(time.time() * 1000)
         sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
         headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
-        url = f"https://api.sfacg.com/api/ad/union/ping"
-        requests.get(url, headers=headers).json()
+        url = "https://api.sfacg.com/api/ad/union/ping"
+        requests.get(url, headers=headers)
         
         for _ in range(5):
             
