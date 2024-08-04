@@ -144,26 +144,26 @@ def checkin(cookie):
         sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
         headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
         url = f"https://api.sfacg.com/user/tasks?taskCategory=5&package=com.sfacg&deviceToken={device_token.lower()}&page=0&size=10"
-        requests.get(url, headers=headers).json()
+        print(requests.get(url, headers=headers).json())
         
         timestamp = int(time.time() * 1000)
         sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
         headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
         url = "https://api.sfacg.com/user/tasks/21"
-        requests.post(url, headers=headers).json()
+        print(requests.post(url, headers=headers).json())  
         
         for _ in range(5):
             
             timestamp = int(time.time() * 1000)
             sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
             headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
-            url = f"https://api.sfacg.com/user/advertisements?deviceToken={device_token}&page=0&size=20"
+            url = f"https://api.sfacg.com/user/advertisements?deviceToken={device_token.lower()}&page=0&size=20"
             print(requests.get(url, headers=headers).json())
             
             timestamp = int(time.time() * 1000)
             sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
             headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
-            url = f"https://api.sfacg.com/user/tasks/21/advertisement?aid=43&deviceToken={device_token}"
+            url = f"https://api.sfacg.com/user/tasks/21/advertisement?aid=43&deviceToken={device_token.lower()}"
             resp = requests.put(url, headers=headers,
                                 data=json.dumps({"num": 1})).json()
             print(resp)
@@ -178,6 +178,7 @@ def checkin(cookie):
             headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
             resp = requests.put("https://api.sfacg.com/user/tasks/21",
                                 headers=headers, data='').json()
+            print(resp)
             if(resp['status']['httpCode'] == 200):
                 couponNum += resp['data']['couponNum']
         time.sleep(5)
