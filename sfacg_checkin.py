@@ -139,6 +139,12 @@ def checkin(cookie):
             if(resp['status']['httpCode'] == 200):
                 fireCoin += resp['data']['fireCoin']
                 exp += resp['data']['exp']
+                
+        timestamp = int(time.time() * 1000)
+        sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
+        headers['sfsecurity'] = f'nonce={nonce}&timestamp={timestamp}&devicetoken={device_token}&sign={sign}'
+        url = f"https://api.sfacg.com/user/tasks?taskCategory=5&package=com.sfacg&deviceToken={device_token.lower()}&page=0&size=10"
+        requests.get(url, headers=headers).json()
         
         timestamp = int(time.time() * 1000)
         sign = md5_hex(f"{nonce}{timestamp}{device_token}{SALT}", 'Upper')
